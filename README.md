@@ -1,8 +1,22 @@
-curl -d@ModuleDescriptor.json https://core-platform-okapi.ci.folio.org/_/proxy/modules
+Get a list of all modules:
+`curl -H X-Okapi-Token:$TOKEN https://core-platform-okapi.ci.folio.org/_/proxy/modules`
 
-# Cat out a new deployment descriptor to 
-# TODO what are the properties for the DD that we want?
-cat > target/DeploymentDescriptor.json { "srvcId": "mod-authtoken-2.10.1", "instId": "mod-authtoken-2.10.1-inst", "url":"http://10.0.2.15:9129" }
+Post the module descriptor to okapi:
+`curl -d@ModAuthTokenMd.json X-Okapi-Token:$TOKEN https://core-platform-okapi.ci.folio.org/_/proxy/modules`
 
-# Post the deployment descriptor to okapi.
-curl -d@DeploymentDescriptor.json https://core-platform-okapi.ci.folio.org/_/discovery/modules
+Post the deployment descriptor to okapi:
+`curl -d@ModAuthTokenDd.json X-Okapi-Token:$TOKEN https://core-platform-okapi.ci.folio.org/_/discovery/modules`
+
+To see what discovery thinks of modules:
+```
+curl -H X-Okapi-Token:$TOKEN https://core-platform-okapi.ci.folio.org/_/discovery/modules
+```
+Returns stuff like this:
+```
+{
+  "instId" : "mod-authtoken-2.12.0-SNAPSHOT.118",
+  "srvcId" : "mod-authtoken-2.12.0-SNAPSHOT.118",
+  "url" : "http://mod-authtoken"
+}
+```
+So I think that is what we should do with the deployment descriptors.
