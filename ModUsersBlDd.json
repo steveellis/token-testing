@@ -1,3 +1,5 @@
 {
-    "srvcId": "mod-users-bl-7.4.1"
+    "instId" : "mod-users-bl-7.4.0-SNAPSHOT",
+    "srvcId" : "mod-users-bl-7.4.0-SNAPSHOT",
+    "url" : "http://mod-users-bl"
 }
