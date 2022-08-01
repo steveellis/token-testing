@@ -3,4 +3,4 @@
 curl -w '\n' -X GET -D - \
   -H "Content-type: application/json" \
   -H "X-Okapi-Token: $TOKEN" \
-  https://core-platform-okapi.ci.folio.org/_/proxy/tenants/diku/modules
+  https://core-platform-okapi.ci.folio.org/_/proxy/health
