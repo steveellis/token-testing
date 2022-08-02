@@ -16,7 +16,9 @@
       console.log("refreshing token")
       fetch('https://core-platform-okapi.ci.folio.org/authn/refresh', {
         method: 'POST',
-        credentials: "include",
+        credentials: 'include',
+        mode: 'cors',
+        body: null,
         headers: {
           'Content-type': 'application/json; charset=UTF-8',
           'X-Okapi-Tenant': 'diku'
@@ -28,6 +30,9 @@
     console.log("Logging in and setting tokens");
     fetch('https://core-platform-okapi.ci.folio.org/bl-users/login-with-expiry', {
       method: 'POST',
+      // Absolutely have to have this specified here or the second request above won't work!
+      credentials: 'include',
+      mode: 'cors',
       body: JSON.stringify({ "username": "diku_admin", "password": "admin" }),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
