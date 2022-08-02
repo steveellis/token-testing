@@ -11,7 +11,55 @@
 <body>
   <h1>Token tester</h1>
   <p><a href="javascript:refresh()">Refresh your token</a></p>
+  <p><a href="javascript:logout()">Logout</a></p>
+  <p><a href="javascript:logoutAll()">Logout all</a></p>
+  <p><a href="javascript:inventorySearch()">Inventory search</a></p>
   <script>
+    function inventorySearch() {
+      console.log("search inventory")
+      fetch('https://core-platform-okapi.ci.folio.org/search/instances?highlightMatch=true&limit=100&query=%28keyword%20all%20%22%2A%22%20or%20isbn%3D%22%2A%22%29%20sortby%20title', {
+        method: 'GET',
+        credentials: 'include',
+        mode: 'cors',
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'X-Okapi-Tenant': 'diku'
+        }
+      })
+        .then(res => res.json())
+        .then(console.log)
+    }
+    function logout() {
+      console.log("logging out")
+      fetch('https://core-platform-okapi.ci.folio.org/authn/logout', {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        body: null,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'X-Okapi-Tenant': 'diku'
+        }
+      })
+        .then(res => res.json())
+        .then(console.log)
+    }
+    function logoutAll() {
+      console.log("logout all")
+      fetch('https://core-platform-okapi.ci.folio.org/authn/logout-all', {
+        method: 'POST',
+        credentials: 'include',
+        mode: 'cors',
+        body: null,
+        headers: {
+          'Content-type': 'application/json; charset=UTF-8',
+          'X-Okapi-Tenant': 'diku',
+          'Authtoken-Refresh-Cache': 'true'
+        }
+      })
+        .then(res => res.json())
+        .then(console.log)
+    }
     function refresh() {
       console.log("refreshing token")
       fetch('https://core-platform-okapi.ci.folio.org/authn/refresh', {
@@ -31,6 +79,7 @@
     fetch('https://core-platform-okapi.ci.folio.org/bl-users/login-with-expiry', {
       method: 'POST',
       // Absolutely have to have this specified here or the second request above won't work!
+      // https://stackoverflow.com/a/51726055
       credentials: 'include',
       mode: 'cors',
       body: JSON.stringify({ "username": "diku_admin", "password": "admin" }),
