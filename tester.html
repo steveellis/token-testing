@@ -15,73 +15,71 @@
   <p><a href="javascript:logoutAll()">Logout all</a></p>
   <p><a href="javascript:inventorySearch()">Inventory search</a></p>
   <script>
-    var host = "https://core-platform-okapi.ci.folio.org";
-    //var loginEndpoint = "bl-users";
-    var loginEndpoint = "bl-users";
-    // For CP rancher
-    var credentials = { "username": "diku_admin", "password": "admin" };
-    // For folio-run-local
-    //var credentials = { "username": "testing_admin", "password": "admin" };
-    var headers = {
-          'Content-type': 'application/json; charset=UTF-8',
-          'X-Okapi-Tenant': 'diku'
-        };
+    var params = {
+      host: "http://localhost:9130",
+      loginEndpoint: "authn",
+      credentials: { "username": "testing_admin", "password": "admin" },
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'X-Okapi-Tenant': 'testlib14'
+      }
+    };
     function inventorySearch() {
       console.log("search inventory")
-      fetch(`${host}/search/instances?highlightMatch=true&limit=100&query=%28keyword%20all%20%22%2A%22%20or%20isbn%3D%22%2A%22%29%20sortby%20title`, {
+      fetch(`${params.host}/search/instances?highlightMatch=true&limit=100&query=%28keyword%20all%20%22%2A%22%20or%20isbn%3D%22%2A%22%29%20sortby%20title`, {
         method: 'GET',
         credentials: 'include',
         mode: 'cors',
-        headers: headers
+        headers: params.headers
       })
         .then(res => res.json())
         .then(console.log)
     }
     function logout() {
       console.log("logging out")
-      fetch(`${host}/authn/logout`, {
+      fetch(`${params.host}/authn/logout`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: headers
+        headers: params.headers
       })
         .then(res => res.json())
         .then(console.log)
     }
     function logoutAll() {
       console.log("logout all")
-      fetch(`${host}/authn/logout-all`, {
+      fetch(`${params.host}/authn/logout-all`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: headers
+        headers: params.headers
       })
         .then(res => res.json())
         .then(console.log)
     }
     function refresh() {
       console.log("refreshing token")
-      fetch(`${host}/authn/refresh`, {
+      fetch(`${params.host}/authn/refresh`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: headers
+        headers: params.headers
       })
         .then(res => res.json())
         .then(console.log)
     }
     console.log("Logging in and setting tokens");
-    fetch(`${host}/${loginEndpoint}/login-with-expiry`, {
+    fetch(`${params.host}/${params.loginEndpoint}/login-with-expiry`, {
       method: 'POST',
       // Absolutely have to have this specified here or the second request above won't work!
       // https://stackoverflow.com/a/51726055
       credentials: 'include',
       mode: 'cors',
-      body: JSON.stringify(credentials),
-      headers: headers
+      body: JSON.stringify(params.credentials),
+      headers: params.headers
     })
       .then(res => res.json())
       .then(console.log)
