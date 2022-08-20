@@ -15,9 +15,16 @@
   <p><a href="javascript:logoutAll()">Logout all</a></p>
   <p><a href="javascript:inventorySearch()">Inventory search</a></p>
   <script>
+    var host = "https://core-platform-okapi.ci.folio.org";
+    //var loginEndpoint = "bl-users";
+    var loginEndpoint = "bl-users";
+    // For CP rancher
+    var credentials = { "username": "diku_admin", "password": "admin" };
+    // For folio-run-local
+    //var credentials = { "username": "testing_admin", "password": "admin" };
     function inventorySearch() {
       console.log("search inventory")
-      fetch('https://core-platform-okapi.ci.folio.org/search/instances?highlightMatch=true&limit=100&query=%28keyword%20all%20%22%2A%22%20or%20isbn%3D%22%2A%22%29%20sortby%20title', {
+      fetch(`${host}/search/instances?highlightMatch=true&limit=100&query=%28keyword%20all%20%22%2A%22%20or%20isbn%3D%22%2A%22%29%20sortby%20title`, {
         method: 'GET',
         credentials: 'include',
         mode: 'cors',
@@ -31,7 +38,7 @@
     }
     function logout() {
       console.log("logging out")
-      fetch('https://core-platform-okapi.ci.folio.org/authn/logout', {
+      fetch(`${host}/authn/logout`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -46,7 +53,7 @@
     }
     function logoutAll() {
       console.log("logout all")
-      fetch('https://core-platform-okapi.ci.folio.org/authn/logout-all', {
+      fetch(`${host}/authn/logout-all`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -62,7 +69,7 @@
     }
     function refresh() {
       console.log("refreshing token")
-      fetch('https://core-platform-okapi.ci.folio.org/authn/refresh', {
+      fetch(`${host}/authn/refresh`, {
         method: 'POST',
         credentials: 'include',
         mode: 'cors',
@@ -76,13 +83,13 @@
         .then(console.log)
     }
     console.log("Logging in and setting tokens");
-    fetch('https://core-platform-okapi.ci.folio.org/bl-users/login-with-expiry', {
+    fetch(`${host}/${loginEndpoint}/login-with-expiry`, {
       method: 'POST',
       // Absolutely have to have this specified here or the second request above won't work!
       // https://stackoverflow.com/a/51726055
       credentials: 'include',
       mode: 'cors',
-      body: JSON.stringify({ "username": "diku_admin", "password": "admin" }),
+      body: JSON.stringify(credentials),
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
         'X-Okapi-Tenant': 'diku'
