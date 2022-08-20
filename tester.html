@@ -10,20 +10,34 @@
 
 <body>
   <h1>Token tester</h1>
+  <p>Login happens when the page is loaded. Change between a local test env or the rancher environment by editing this page's source.</p>
   <p><a href="javascript:refresh()">Refresh your token</a></p>
   <p><a href="javascript:logout()">Logout</a></p>
   <p><a href="javascript:logoutAll()">Logout all</a></p>
   <p><a href="javascript:inventorySearch()">Inventory search</a></p>
   <script>
+    // If using folio-local-run
+    // var params = {
+    //   host: "http://localhost:9130",
+    //   loginEndpoint: "authn",
+    //   credentials: { "username": "testing_admin", "password": "admin" },
+    //   headers: {
+    //     'Content-type': 'application/json; charset=UTF-8',
+    //     'X-Okapi-Tenant': 'testlib14'
+    //   }
+    // };
+
+    // If using rancher.
     var params = {
-      host: "http://localhost:9130",
-      loginEndpoint: "authn",
-      credentials: { "username": "testing_admin", "password": "admin" },
+      host: "https://core-platform-okapi.ci.folio.org",
+      loginEndpoint: "bl-users",
+      credentials: { "username": "diku_admin", "password": "admin" },
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
-        'X-Okapi-Tenant': 'testlib14'
+        'X-Okapi-Tenant': 'diku'
       }
     };
+
     function inventorySearch() {
       console.log("search inventory")
       fetch(`${params.host}/search/instances?highlightMatch=true&limit=100&query=%28keyword%20all%20%22%2A%22%20or%20isbn%3D%22%2A%22%29%20sortby%20title`, {
