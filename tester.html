@@ -22,16 +22,17 @@
     var credentials = { "username": "diku_admin", "password": "admin" };
     // For folio-run-local
     //var credentials = { "username": "testing_admin", "password": "admin" };
+    var headers = {
+          'Content-type': 'application/json; charset=UTF-8',
+          'X-Okapi-Tenant': 'diku'
+        };
     function inventorySearch() {
       console.log("search inventory")
       fetch(`${host}/search/instances?highlightMatch=true&limit=100&query=%28keyword%20all%20%22%2A%22%20or%20isbn%3D%22%2A%22%29%20sortby%20title`, {
         method: 'GET',
         credentials: 'include',
         mode: 'cors',
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-          'X-Okapi-Tenant': 'diku'
-        }
+        headers: headers
       })
         .then(res => res.json())
         .then(console.log)
@@ -43,10 +44,7 @@
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-          'X-Okapi-Tenant': 'diku'
-        }
+        headers: headers
       })
         .then(res => res.json())
         .then(console.log)
@@ -58,11 +56,7 @@
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-          'X-Okapi-Tenant': 'diku',
-          'Authtoken-Refresh-Cache': 'true'
-        }
+        headers: headers
       })
         .then(res => res.json())
         .then(console.log)
@@ -74,10 +68,7 @@
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: {
-          'Content-type': 'application/json; charset=UTF-8',
-          'X-Okapi-Tenant': 'diku'
-        }
+        headers: headers
       })
         .then(res => res.json())
         .then(console.log)
@@ -90,10 +81,7 @@
       credentials: 'include',
       mode: 'cors',
       body: JSON.stringify(credentials),
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'X-Okapi-Tenant': 'diku'
-      }
+      headers: headers
     })
       .then(res => res.json())
       .then(console.log)
