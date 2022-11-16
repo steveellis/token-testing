@@ -29,7 +29,7 @@
 
     // If using rancher.
     var params = {
-      host: "https://core-platform-okapi.ci.folio.org",
+      host: "https://folio-dev-core-platform-okapi.ci.folio.org",
       loginEndpoint: "bl-users",
       credentials: { "username": "diku_admin", "password": "admin" },
       headers: {
@@ -56,10 +56,8 @@
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: params.headers
-      })
-        .then(res => res.json())
-        .then(console.log)
+        headers: { 'X-Okapi-Tenant': 'diku' }
+      });
     }
     function logoutAll() {
       console.log("logout all")
@@ -68,10 +66,8 @@
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: params.headers
-      })
-        .then(res => res.json())
-        .then(console.log)
+        headers: { 'X-Okapi-Tenant': 'diku' }
+      });
     }
     function refresh() {
       console.log("refreshing token")
@@ -85,7 +81,7 @@
         .then(res => res.json())
         .then(console.log)
     }
-    console.log("Logging in and setting tokens");
+    console.log("logging in and setting tokens");
     fetch(`${params.host}/${params.loginEndpoint}/login-with-expiry`, {
       method: 'POST',
       // Absolutely have to have this specified here or the second request above won't work!
