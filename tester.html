@@ -16,10 +16,11 @@
   <p><a href="javascript:logoutAll()">Logout all</a></p>
   <p><a href="javascript:inventorySearch()">Inventory search</a></p>
   <script>
-    // If using folio-local-run
+    //If using folio-local-run
     // var params = {
     //   host: "http://localhost:9130",
     //   loginEndpoint: "authn",
+    //   //loginEndpoint: "bl-users",
     //   credentials: { "username": "testing_admin", "password": "admin" },
     //   headers: {
     //     'Content-type': 'application/json; charset=UTF-8',
@@ -27,14 +28,14 @@
     //   }
     // };
 
-    // If using rancher.
+    //If using rancher.
     var params = {
-      host: "https://folio-dev-core-platform-okapi.ci.folio.org",
-      loginEndpoint: "bl-users",
-      credentials: { "username": "diku_admin", "password": "admin" },
+      host: "https://folio-dev-thunderjet-okapi.ci.folio.org",
+      loginEndpoint: "authn",
+      credentials: { "username": "", "password": "" },
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
-        'X-Okapi-Tenant': 'diku'
+        'X-Okapi-Tenant': 'mobius'
       }
     };
 
@@ -56,7 +57,7 @@
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: { 'X-Okapi-Tenant': 'diku' }
+        headers: params.headers
       });
     }
     function logoutAll() {
@@ -66,7 +67,7 @@
         credentials: 'include',
         mode: 'cors',
         body: null,
-        headers: { 'X-Okapi-Tenant': 'diku' }
+        headers: params.headers
       });
     }
     function refresh() {
