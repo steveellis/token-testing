@@ -17,27 +17,27 @@
   <p><a href="javascript:inventorySearch()">Inventory search</a></p>
   <script>
     //If using folio-local-run
-    // var params = {
-    //   host: "http://localhost:9130",
-    //   loginEndpoint: "authn",
-    //   //loginEndpoint: "bl-users",
-    //   credentials: { "username": "testing_admin", "password": "admin" },
-    //   headers: {
-    //     'Content-type': 'application/json; charset=UTF-8',
-    //     'X-Okapi-Tenant': 'testlib14'
-    //   }
-    // };
-
-    //If using rancher.
     var params = {
-      host: "https://folio-dev-thunderjet-okapi.ci.folio.org",
-      loginEndpoint: "authn",
-      credentials: { "username": "", "password": "" },
+      host: "http://steve-host-2:9130",
+      //loginEndpoint: "authn",
+      loginEndpoint: "bl-users",
+      credentials: { "username": "testing_admin", "password": "admin" },
       headers: {
         'Content-type': 'application/json; charset=UTF-8',
-        'X-Okapi-Tenant': 'mobius'
+        'X-Okapi-Tenant': 'testlib14'
       }
     };
+
+    //If using rancher.
+    // var params = {
+    //   host: "https://folio-dev-thunderjet-okapi.ci.folio.org",
+    //   loginEndpoint: "bl-users",
+    //   credentials: { "username": "", "password": "" },
+    //   headers: {
+    //     'Content-type': 'application/json; charset=UTF-8',
+    //     'X-Okapi-Tenant': 'mobius'
+    //   }
+    // };
 
     function inventorySearch() {
       console.log("search inventory")
