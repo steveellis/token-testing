@@ -17,16 +17,16 @@
   <p><a href="javascript:inventorySearch()">Inventory search</a></p>
   <script>
     //If using folio-local-run
-    var params = {
-      host: "http://steve-host-2:9130",
-      //loginEndpoint: "authn",
-      loginEndpoint: "bl-users",
-      credentials: { "username": "testing_admin", "password": "admin" },
-      headers: {
-        'Content-type': 'application/json; charset=UTF-8',
-        'X-Okapi-Tenant': 'testlib14'
-      }
-    };
+    // var params = {
+    //   host: "http://steve-host-2:9130",
+    //   //loginEndpoint: "authn",
+    //   loginEndpoint: "bl-users",
+    //   credentials: { "username": "testing_admin", "password": "admin" },
+    //   headers: {
+    //     'Content-type': 'application/json; charset=UTF-8',
+    //     'X-Okapi-Tenant': 'testlib14'
+    //   }
+    // };
 
     //If using rancher.
     // var params = {
@@ -38,6 +38,18 @@
     //     'X-Okapi-Tenant': 'mobius'
     //   }
     // };
+
+    // If using snapshot.
+    var params = {
+      host: "https://folio-snapshot-okapi.dev.folio.org",
+      loginEndpoint: "bl-users",
+      credentials: { "username": "diku_admin", "password": "" },
+      headers: {
+        'Content-type': 'application/json; charset=UTF-8',
+        'X-Okapi-Tenant': 'diku'
+      }
+    };
+
 
     function inventorySearch() {
       console.log("search inventory")
